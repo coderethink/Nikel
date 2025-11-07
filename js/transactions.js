@@ -7,13 +7,6 @@ let data = {
 
 document.getElementById("button-logout").addEventListener("click", logout);
 
-function logout() {
-    sessionStorage.removeItem("logged");
-    localStorage.removeItem("session");
-    window.location.href = "index.html";
-}
-
-
 // ADICIONAR LANÇAMENTO
 document.getElementById("transaction-form").addEventListener("submit", function (e) {
     e.preventDefault();
@@ -32,11 +25,10 @@ document.getElementById("transaction-form").addEventListener("submit", function 
     saveData(data);
     e.target.reset();
     myModal.hide();
-    getTransactions();
+    getTransactionsHTML();
     
     alert("Lançamento adicionado com sucesso!");
 });
-
 
 function checklogged() {
     if (session) {
@@ -53,10 +45,7 @@ function checklogged() {
         data = JSON.parse(dataUser);
     }
 
-    getTransactions();
-    getCashIn();
-    getCashOut();
-    geTotal();
+    getTransactionsHTML();
 }
 
 function logout() {
@@ -65,20 +54,20 @@ function logout() {
     window.location.href = "index.html";
 }
 
-function getTransactionsHTML(transactions) {
+function getTransactionsHTML() {
     const transactions = data.transactions;
-    let transactionsHTML = ``;
+    let transactionsHtml = ``;
 
-    if (transactionsHTML.length ) { 
+    if(transactions.length) {
         transactions.forEach((item) => {
             let type = "Entrada";
             if (item.type === "2") {
                 type = "Saída";
             }
-            transactionsHTML += `
+            transactionsHtml += `
             <tr>
                 <th scope="row">${item.date}</th>
-                <td>${item.value.toFixed(2)}</td>
+                <td>R$ ${item.value.toFixed(2)}</td>
                 <td>${type}</td>
                 <td>${item.description}</td>
             </tr>
@@ -86,11 +75,13 @@ function getTransactionsHTML(transactions) {
         });
     }
 
-    document.getElementById("transactions-list").innerHTML = transactionsHTML;
+    document.getElementById("transactions-list").innerHTML = transactionsHtml;
 }
 
 function saveData(data) {
-    // salvar usando a chave do usuário atualmente logado (mais confiável que data.login)
     if (!logged) return;
     localStorage.setItem(logged, JSON.stringify(data));
 }
+
+// Inicializar a página
+checklogged();

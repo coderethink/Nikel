@@ -70,14 +70,7 @@
                                             <th scope="col">Descrição</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">2021-11-11</th>
-                                            <td>50.00</td>
-                                            <td>Saída</td>
-                                            <td>Gasolina</td>
-                                        </tr>
-                                      
+                                    <tbody id="transactions-list">
                                     </tbody>
                                 </table>
                             </div>
@@ -96,7 +89,7 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Adicionar Lançamento</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form id="transaction-for">
+                    <form id="transaction-form">
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label for="value-input" class="form-label">Valor</label>

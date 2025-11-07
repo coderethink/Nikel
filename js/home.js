@@ -55,7 +55,7 @@ function checklogged() {
     }
     getCashIn();
     getCashOut();
-    geTotal();
+    getTotal();
 }
 
 function logout() {
@@ -122,7 +122,7 @@ function getCashOut() {
     document.getElementById("cash-out-list").innerHTML = cashOutHtml;
 }
 
-function geTotal() {
+function getTotal() {
     const transactions = data.transactions || [];
     let total = 0;
     transactions.forEach((item) => {
@@ -131,8 +131,6 @@ function geTotal() {
         } else {
             total -= item.value;
         }
-
-
     });
     document.getElementById("total").innerHTML = `R$ ${total.toFixed(2)}`;
 }
